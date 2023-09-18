@@ -4,8 +4,6 @@
 #include <sys/wait.h>
 
 int main() {
-    int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    int even_sum = 0, odd_sum = 0;
     pid_t child_pid;
 
     // Create a child process
@@ -16,7 +14,7 @@ int main() {
     }
     else
     {
-        // wait(NULL);
+        wait(NULL);
         printf("Parent process");
         printf("CHILD PID%d", child_pid);
     }
