@@ -54,54 +54,43 @@ int isSafe(int available[], int **max, int **allocation, int **need, int process
 int main() {
     int processes, resources, i, j;
 
-    printf("Enter the number of processes: ");
+    printf("Enter the number of processes (max %d): ", MAX_PROCESSES);
     scanf("%d", &processes);
 
-    printf("Enter the number of resources: ");
+    printf("Enter the number of resources (max %d): ", MAX_RESOURCES);
     scanf("%d", &resources);
 
-    int available[resources];
-    int **max = malloc(processes * sizeof(int *));
-    int **allocation = malloc(processes * sizeof(int *));
-    int **need = malloc(processes * sizeof(int *));
+    if (processes > MAX_PROCESSES || resources > MAX_RESOURCES) {
+        printf("Exceeding the maximum limit of processes or resources.\n");
+        return 1;
+    }
+
+    int available[MAX_RESOURCES];
+    int max[MAX_PROCESSES][MAX_RESOURCES];
+    int allocation[MAX_PROCESSES][MAX_RESOURCES];
+    int need[MAX_PROCESSES][MAX_RESOURCES];
 
     printf("Enter the available resources:\n");
     for (i = 0; i < resources; i++)
         scanf("%d", &available[i]);
 
     printf("Enter the maximum resources required for each process:\n");
-    for (i = 0; i < processes; i++) {
-        max[i] = malloc(resources * sizeof(int));
+    for (i = 0; i < processes; i++)
         for (j = 0; j < resources; j++)
             scanf("%d", &max[i][j]);
-    }
 
     printf("Enter the allocated resources for each process:\n");
-    for (i = 0; i < processes; i++) {
-        allocation[i] = malloc(resources * sizeof(int));
+    for (i = 0; i < processes; i++)
         for (j = 0; j < resources; j++)
             scanf("%d", &allocation[i][j]);
-    }
 
     // Calculate need matrix
-    for (i = 0; i < processes; i++) {
-        need[i] = malloc(resources * sizeof(int));
+    for (i = 0; i < processes; i++)
         for (j = 0; j < resources; j++)
             need[i][j] = max[i][j] - allocation[i][j];
-    }
 
     // Perform safety check
     isSafe(available, max, allocation, need, processes, resources);
-
-    // Free allocated memory
-    for (i = 0; i < processes; i++) {
-        free(max[i]);
-        free(allocation[i]);
-        free(need[i]);
-    }
-    free(max);
-    free(allocation);
-    free(need);
 
     return 0;
 }
