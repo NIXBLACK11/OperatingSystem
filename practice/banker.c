@@ -1,4 +1,6 @@
 #include <stdio.h>
+# define MAX_PROCESSES 5
+#define MAX_RESOURCES 3
 
 // Function to check if a process can be granted resources
 int isSafe(int available[], int **max, int **allocation, int **need, int processes, int resources) {
