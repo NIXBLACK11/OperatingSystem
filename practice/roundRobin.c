@@ -20,7 +20,7 @@ int main() {
     printf("Enter the Time Quantum for the process: ");
     scanf("%d", &quant);
 
-    printf("\nProcess No\tBurst Time\tTAT\tWaiting Time\n");
+    printf("\nProcess No\tTime\tBurst Time\tTAT\tWaiting Time\n");
     
     for (sum = 0, i = 0; y != 0;) {
         if (temp[i] <= quant && temp[i] > 0) {
@@ -34,7 +34,7 @@ int main() {
 
         if (temp[i] == 0 && count == 1) {
             y--;
-            printf("Process No[%d]\t%d\t\t%d\t\t%d\n", i + 1, bt[i], sum - at[i], sum - at[i] - bt[i]);
+            printf("Process No[%d]\t%d\t\t%d\t\t%d\t\t%d\n", i + 1, sum, bt[i], sum - at[i], sum - at[i] - bt[i]);
             wt += sum - at[i] - bt[i];
             tat += sum - at[i];
             count = 0;

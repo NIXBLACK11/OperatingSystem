@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<pthread.h>
+
 void *funcThread(void *arg)
 {
     printf("Inside thread\n");

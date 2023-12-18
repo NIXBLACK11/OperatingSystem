@@ -44,8 +44,13 @@ int main()
                 lt[i] -= TQ;
             }
         }
-
-        i = (i + 1) % n; // Update i in a way that ensures it remains within bounds
+        if(i==n-1)
+            i = 0;
+        else if(at[i+1]<=currentTime)
+            i++;
+        else
+            i=0;
+        // i = (i + 1) % n; // Update i in a way that ensures it remains within bounds
     }
 
     return 0;
